@@ -2,6 +2,8 @@
 
 Game to participate in the GameOff2021 contest.
 
+This game is motivated by the movie "Love & Monsters". In an apocalyptic world dominated by giant insect, the user need to fight the monsters and survive as mush as possible.
+
 ## Setup OGRE locally (UBUNTU)
 
 Using the following script, the ogre project is automatically cloned, and installed in the target system.
