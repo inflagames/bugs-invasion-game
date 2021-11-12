@@ -9,4 +9,4 @@ configure_file(resources.cfg ${CMAKE_CURRENT_BINARY_DIR}/resources.cfg @ONLY)
 
 add_executable(bugsinvation main.cpp)
 
-target_link_libraries(bugsinvation OgreBites OgreRTShaderSystem)
+target_link_libraries(bugsinvation OgreBites OgreRTShaderSystem OgreTerrain)

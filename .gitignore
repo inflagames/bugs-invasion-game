@@ -5,3 +5,6 @@ build
 
 # IDEs
 .idea
+
+# blender
+resources/OgreXMLConverter.log
