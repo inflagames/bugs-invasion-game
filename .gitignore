@@ -7,4 +7,4 @@ build
 .idea
 
 # blender
-resources/OgreXMLConverter.log
+bin/game/assets/OgreXMLConverter.log

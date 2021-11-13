@@ -34,6 +34,25 @@ docker run -it -v /home/guille/CLionProjects/template:/app ggjnez92/ogre-ubuntu2
 
 > NOTE: First the build should be executed
 
+## Project structure
+
+```
+|-- bin
+|   |-- game
+|       |-- assets              (app assets, textures, images, etc...)
+|       |-- inc                 (app headers)
+|       |-- src                 (app sources)
+|       |-- resources.cfg       (resources config file)
+|       |-- main.cpp            (app main file)
+|-- blender-projects            (blender 3d model projects)
+|   |-- bluprints               (3d models blueprints)
+|   |-- TANKS_DOCUMENTATION.md  (tanks documentation)
+|-- doc
+|-- include
+|-- lib
+|-- scripts
+```
+
 ## License
 
 [Apache 2.0](./LICENSE.md)
