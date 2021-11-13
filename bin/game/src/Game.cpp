@@ -24,31 +24,31 @@ bool Game::keyPressed(const OgreBites::KeyboardEvent &evt) {
                     Vector3(node->getPosition().x + moveDistance, node->getPosition().y, node->getPosition().z));
 //            node->rotate(Ogre::Quaternion(Ogre::Degree(2),Ogre::Vector3(0,0,1)), Ogre::Node::TS_LOCAL);
             break;
-        case OgreBites::SDLK_DOWN:
-            node->setPosition(
-                    Vector3(node->getPosition().x, node->getPosition().y, node->getPosition().z - moveDistance));
-//            node->rotate(Ogre::Quaternion(Ogre::Degree(2),Ogre::Vector3(0,0,1)), Ogre::Node::TS_LOCAL);
-            break;
+//        case OgreBites::SDLK_DOWN:
+//            node->setPosition(
+//                    Vector3(node->getPosition().x, node->getPosition().y, node->getPosition().z - moveDistance));
+////            node->rotate(Ogre::Quaternion(Ogre::Degree(2),Ogre::Vector3(0,0,1)), Ogre::Node::TS_LOCAL);
+//            break;
+//        case OgreBites::SDLK_UP:
+//            node->setPosition(
+//                    Vector3(node->getPosition().x, node->getPosition().y, node->getPosition().z + moveDistance));
+////            node->rotate(Ogre::Quaternion(Ogre::Degree(2),Ogre::Vector3(0,0,1)), Ogre::Node::TS_LOCAL);
+//            break;
         case OgreBites::SDLK_UP:
             node->setPosition(
-                    Vector3(node->getPosition().x, node->getPosition().y, node->getPosition().z + moveDistance));
-//            node->rotate(Ogre::Quaternion(Ogre::Degree(2),Ogre::Vector3(0,0,1)), Ogre::Node::TS_LOCAL);
-            break;
-        case OgreBites::SDLK_SPACE:
-            node->setPosition(
                     Vector3(node->getPosition().x, node->getPosition().y + moveDistance, node->getPosition().z));
-//            node->rotate(Ogre::Quaternion(Ogre::Degree(2),Ogre::Vector3(0,0,1)), Ogre::Node::TS_LOCAL);
+//            node->rotate(Ogre::Quaternion(Ogre::Degree(2),Ogre::Vector3(1,0,0)), Ogre::Node::TS_LOCAL);
             break;
-        case OgreBites::KMOD_CTRL:
+        case OgreBites::SDLK_DOWN:
             node->setPosition(
                     Vector3(node->getPosition().x, node->getPosition().y - moveDistance, node->getPosition().z));
-//            node->rotate(Ogre::Quaternion(Ogre::Degree(2),Ogre::Vector3(0,0,1)), Ogre::Node::TS_LOCAL);
+//            node->rotate(Ogre::Quaternion(Ogre::Degree(2),Ogre::Vector3(-1,0,0)), Ogre::Node::TS_LOCAL);
             break;
         default:
             break;
     }
     Vector3 pos = node->getPosition();
-//    printf("position: %f, %f, %f\n", pos.x, pos.y, pos.z);
+    printf("position: %f, %f, %f\n", pos.x, pos.y, pos.z);
     return true;
 }
 
@@ -78,8 +78,8 @@ void Game::setup() {
 
     // also need to tell where we are
     camNode = scnMgr->getRootSceneNode()->createChildSceneNode();
-    camNode->setPosition(0, 1500, 0);
-    camNode->lookAt(Vector3(0, 0, -1000), Node::TS_WORLD);
+    camNode->setPosition(0, 1090, 0);
+    camNode->lookAt(Vector3(0, 0, -300), Node::TS_WORLD);
 
     // create the camera
     Camera *cam = scnMgr->createCamera("myCam");
