@@ -40,17 +40,17 @@ docker run -it -v /home/guille/CLionProjects/template:/app ggjnez92/ogre-ubuntu2
 |-- bin
 |   |-- game
 |       |-- assets              (app assets, textures, images, etc...)
-|       |-- inc                 (app headers)
+|       |-- inc                 (app private headers)
 |       |-- src                 (app sources)
 |       |-- resources.cfg       (resources config file)
 |       |-- main.cpp            (app main file)
 |-- blender-projects            (blender 3d model projects)
 |   |-- bluprints               (3d models blueprints)
 |   |-- TANKS_DOCUMENTATION.md  (tanks documentation)
-|-- doc
-|-- include
-|-- lib
-|-- scripts
+|-- doc                         (project documentation)
+|-- include                     (public headers)
+|-- lib                         (external libraries)
+|-- scripts                     (helper scripts)
 ```
 
 ## License
