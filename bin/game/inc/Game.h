@@ -8,6 +8,7 @@
 #include "Ogre.h"
 #include "OgreApplicationContext.h"
 #include "Field.h"
+#include "Tanks/Tank.h"
 
 using namespace Ogre;
 
@@ -22,8 +23,15 @@ public:
     virtual bool frameRenderingQueued(const Ogre::FrameEvent &evt);
 
 private:
+    SceneManager *scnMgr;
     SceneNode *camNode;
-    Field gameField;
+    SceneNode *lightNode;
+    Light *light;
+    Field *gameField;
+    Tank *tank;
+
+    void createLight(SceneManager *scnMgr);
+    void createCamera(SceneManager *scnMgr);
 };
 
 #endif //BUGSINVATION_GAME_H

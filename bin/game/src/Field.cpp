@@ -51,7 +51,7 @@ void Field::setupGlobalOptions(SceneManager *scnMgr, Light *light) {
 void Field::createTerrainGroup(SceneManager *scnMgr) {
     terrainGroup = OGRE_NEW TerrainGroup(scnMgr, Terrain::ALIGN_X_Z, TERRAIN_SIZE, TERRAIN_WORLD_SIZE);
     terrainGroup->setFilenameConvention("temp", "ter");
-    terrainGroup->setOrigin(Vector3(0, 0, 0));
+    terrainGroup->setOrigin(Vector3(0, -1000, 0));
 }
 
 void Field::loadDefaultTextures() {
