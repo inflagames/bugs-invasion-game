@@ -7,6 +7,7 @@
 
 #include "Ogre.h"
 #include "../PhysicBase.h"
+#include "../Utils.h"
 
 using namespace Ogre;
 
@@ -18,11 +19,12 @@ public:
 
     void render(const Ogre::FrameEvent &evt);
 
-    void createPhysicEntity(PhysicsWorld *world, PhysicsCommon *physicsCommon);
+    void createPhysicEntity(PhysicsWorld *world, PhysicsCommon *physicsCommon) override;
 
 private:
     SceneNode *camNode;
     SceneNode *tankNode;
+    Ogre::Entity *tankEntity;
     AnimationState *tankAnimationEntity;
     RigidBody *tankPhysicBody;
 };

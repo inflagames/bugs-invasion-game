@@ -6,8 +6,6 @@
 #define BUGSINVATION_FIELD_H
 
 #include "Ogre.h"
-#include "Terrain/OgreTerrain.h"
-#include "Terrain/OgreTerrainGroup.h"
 #include "PhysicBase.h"
 
 using namespace Ogre;
@@ -16,27 +14,18 @@ class Field : public PhysicBase {
 public:
     void createField(SceneManager *scnMgr, Light *light);
 
-    void initBlendMaps(Terrain *terrain);
+    void render(const Ogre::FrameEvent &evt);
 
-    void createPhysicEntity(PhysicsWorld *world, PhysicsCommon *physicsCommon);
+    void createPhysicEntity(PhysicsWorld *world, PhysicsCommon *physicsCommon) override;
 
 private:
-    int TERRAIN_SIZE = 513;
-    Real TERRAIN_WORLD_SIZE = 12000.0f;
+    SceneNode *terrainNode;
+    Ogre::Entity *terrainEntity;
+    RigidBody *fieldBody;
+    float heightValues[100];
 
     SceneManager *scnMgr;
-    TerrainGlobalOptions *terrainGlobal;
-    TerrainGroup *terrainGroup;
 
-    bool isTerrainsImported = false;
-
-    void setupGlobalOptions(SceneManager *scnMgr, Light *light);
-
-    void createTerrainGroup(SceneManager *scnMgr);
-
-    void loadDefaultTextures();
-
-    Ogre::Vector3 getPointHeight(Ogre::Vector3 position);
 };
 
 #endif //BUGSINVATION_FIELD_H

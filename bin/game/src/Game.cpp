@@ -83,13 +83,14 @@ void Game::createLight(SceneManager *scnMgr) {
     light->setDiffuseColour(ColourValue::White);
     light->setSpecularColour(ColourValue(0.4, 0.4, 0.4));
     lightNode = scnMgr->getRootSceneNode()->createChildSceneNode();
-    lightNode->setPosition(0, 10, 15);
+    lightNode->setPosition(0, 110, 15);
     lightNode->attachObject(light);
 }
 
 bool Game::frameRenderingQueued(const Ogre::FrameEvent &evt) {
     physicsWorld->update(evt.timeSinceLastFrame);
     tank->render(evt);
+    gameField->render(evt);
     return true;
 }
 

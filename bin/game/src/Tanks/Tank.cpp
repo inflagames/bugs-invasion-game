@@ -7,17 +7,14 @@
 Tank::Tank(SceneManager *scnMgr, SceneNode *camNode) {
     this->camNode = camNode;
 
-    Ogre::Entity *tankEntity = scnMgr->createEntity("tank.mesh");
+    tankEntity = scnMgr->createEntity("tank.mesh");
     tankNode = scnMgr->getRootSceneNode()->createChildSceneNode();
     tankNode->attachObject(tankEntity);
-//    tankNode->rotate(Ogre::Quaternion(Ogre::Degree(-90), Ogre::Vector3(1, 0, 0)), Ogre::Node::TS_LOCAL);
-//    tankNode->setPosition(Vector3(0, 0, 0));
+    tankNode->setPosition(0, 10, 0);
 
     AnimationStateSet *some = tankEntity->getAllAnimationStates();
-    if (some == nullptr) {
-        printf("-----IS NULL-----\n");
-    } else {
-        printf("-----WITH ANIMATION-----\n");
+    if (some != nullptr) {
+        printf("-----ANIMATIONS-----\n");
         AnimationStateIterator asi = some->getAnimationStateIterator();
         int c = 0;
         while (asi.hasMoreElements()) {
@@ -44,10 +41,11 @@ void Tank::render(const FrameEvent &evt) {
     tankAnimationEntity->addTime(time);
 
     reactphysics3d::Vector3 pos = tankPhysicBody->getTransform().getPosition();
+    printf("x: %f, y: %f, z: %f\n", pos.x, pos.y, pos.z);
     tankNode->setPosition(pos.x, pos.y, pos.z);
 
     Ogre::Vector3 tankPosition = tankNode->getPosition();
-    camNode->setPosition(tankPosition.x, tankPosition.y + 35, tankPosition.z + 15);
+    camNode->setPosition(tankPosition.x, tankPosition.y + 35, tankPosition.z + 30);
     camNode->lookAt(tankNode->getPosition(), Ogre::Node::TS_WORLD);
 }
 
@@ -57,5 +55,23 @@ void Tank::createPhysicEntity(PhysicsWorld *world, PhysicsCommon *physicsCommon)
             reactphysics3d::Vector3(tankPosition.x, tankPosition.y, tankPosition.z),
             reactphysics3d::Quaternion::identity());
     tankPhysicBody = world->createRigidBody(transform);
-    tankPhysicBody->setMass(10);
+    tankPhysicBody->setType(reactphysics3d::BodyType::DYNAMIC);
+    tankPhysicBody->setMass(1);
+
+    size_t vertex_count, index_count;
+    Ogre::Vector3 *vertices;
+    unsigned long *indices;
+
+    Utils::getMeshInformation(tankEntity->getMesh().get(),
+                              vertex_count,
+                              vertices,
+                              index_count,
+                              indices,
+                              tankNode->getPosition(),
+                              tankNode->getOrientation(),
+                              tankNode->getScale());
+
+    const reactphysics3d::Vector3 halfExtents(2.0, 3.0, 5.0);
+    BoxShape *boxShape = physicsCommon->createBoxShape(halfExtents);
+    tankPhysicBody->addCollider(boxShape, Transform::identity());
 }
