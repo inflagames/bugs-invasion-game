@@ -1,6 +1,7 @@
 # build data
 cmake-build-debug
 ogre
+reactphysics3d
 build
 
 # IDEs
