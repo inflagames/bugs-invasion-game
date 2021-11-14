@@ -8,9 +8,11 @@
 #include "Ogre.h"
 #include "OgreApplicationContext.h"
 #include "Field.h"
+#include <reactphysics3d/reactphysics3d.h>
 #include "Tanks/Tank.h"
 
 using namespace Ogre;
+using namespace reactphysics3d;
 
 class Game : public OgreBites::ApplicationContext, public OgreBites::InputListener {
 public:
@@ -30,8 +32,12 @@ private:
     Field *gameField;
     Tank *tank;
 
+    PhysicsCommon physicsCommon;
+    PhysicsWorld *physicsWorld;
+
     void createLight(SceneManager *scnMgr);
     void createCamera(SceneManager *scnMgr);
+    void createPhysicWord();
 };
 
 #endif //BUGSINVATION_GAME_H

@@ -5,6 +5,7 @@
 #include "../inc/Field.h"
 
 void Field::createField(SceneManager *scnMgr, Light *light) {
+    this->scnMgr = scnMgr;
     setupGlobalOptions(scnMgr, light);
     createTerrainGroup(scnMgr);
     loadDefaultTextures();
@@ -51,7 +52,7 @@ void Field::setupGlobalOptions(SceneManager *scnMgr, Light *light) {
 void Field::createTerrainGroup(SceneManager *scnMgr) {
     terrainGroup = OGRE_NEW TerrainGroup(scnMgr, Terrain::ALIGN_X_Z, TERRAIN_SIZE, TERRAIN_WORLD_SIZE);
     terrainGroup->setFilenameConvention("temp", "ter");
-    terrainGroup->setOrigin(Vector3(0, -1000, 0));
+    terrainGroup->setOrigin(Ogre::Vector3(0, -300.25, 0));
 }
 
 void Field::loadDefaultTextures() {
@@ -95,4 +96,62 @@ void Field::initBlendMaps(Terrain *terrain) {
     blendMap1->dirty();
     blendMap0->update();
     blendMap1->update();
+}
+
+void Field::createPhysicEntity(PhysicsWorld *world, PhysicsCommon *physicsCommon) {
+//    for (const auto &ti: terrainGroup->getTerrainSlots()) {
+//        initBlendMaps(ti.second->instance);
+//    }
+    Ogre::Vector3 point = getPointHeight(Ogre::Vector3(0, 50000, 0));
+
+    AxisAlignedBox box = terrainGroup->getTerrainSlots().begin()->second->instance->getAABB();
+
+    const int nbRows = 100;
+    const int nbColumns = 100;
+    float minHeight = box.getMinimum().y;
+    float maxHeight = box.getMaximum().y;
+    // Height values
+    float heightValues[nbRows * nbColumns];
+    float tileSize = (box.getMaximum().x - box.getMinimum().x) / nbRows;
+    for (int i = 0; i < nbRows; ++i) {
+        for (int j = 0; j < nbColumns; ++j) {
+            Ogre::Vector3 point = getPointHeight(
+                    Ogre::Vector3(tileSize * float(i) + box.getMinimum().x, 50000, tileSize * float(j) + box.getMinimum().z));
+            heightValues[i * nbColumns + j] = point.y;
+        }
+    }
+
+
+    // Create the heightfield collision shape
+//    HeightFieldShape *heightFieldShape = physicsCommon->createHeightFieldShape(nbColumns,
+//                                                                               nbRows, minHeight,
+//                                                                               maxHeight, heightValues,
+//                                                                               HeightFieldShape::HeightDataType::HEIGHT_FLOAT_TYPE);
+//
+//    reactphysics3d::Transform transform(
+//            reactphysics3d::Vector3(0, -1000, 0),
+//            reactphysics3d::Quaternion::identity());
+//    RigidBody *fieldBody = world->createRigidBody(transform);
+//    fieldBody->addCollider(heightFieldShape, transform);
+//    fieldBody->setType(reactphysics3d::BodyType::STATIC);
+}
+
+Ogre::Vector3 Field::getPointHeight(Ogre::Vector3 position) {
+    Ogre::Vector3 rayDirection(position.x, position.y - 100, position.z);
+
+    Ogre::Ray myRay(position, rayDirection);
+    RaySceneQuery *raySQuery = scnMgr->createRayQuery(Ogre::Ray());
+    raySQuery->setRay(myRay);
+
+    RaySceneQueryResult &raySQResult = raySQuery->execute();
+
+    for (auto raySQREntry: raySQResult) {
+        String rayHitPointName;
+
+        if (raySQREntry.movable != nullptr && raySQREntry.movable->getName().rfind("tile[", 0) == 0) {
+            rayHitPointName = raySQREntry.movable->getName();
+            return myRay.getOrigin() + (myRay.getDirection() * raySQREntry.distance);
+        }
+    }
+    return {};
 }

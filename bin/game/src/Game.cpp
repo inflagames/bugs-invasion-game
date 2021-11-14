@@ -16,12 +16,12 @@ bool Game::keyPressed(const OgreBites::KeyboardEvent &evt) {
             break;
         case OgreBites::SDLK_LEFT:
             node->setPosition(
-                    Vector3(node->getPosition().x - moveDistance, node->getPosition().y, node->getPosition().z));
+                    Ogre::Vector3(node->getPosition().x - moveDistance, node->getPosition().y, node->getPosition().z));
 //            node->rotate(Ogre::Quaternion(Ogre::Degree(-2),Ogre::Vector3(0,0,1)), Ogre::Node::TS_LOCAL);
             break;
         case OgreBites::SDLK_RIGHT:
             node->setPosition(
-                    Vector3(node->getPosition().x + moveDistance, node->getPosition().y, node->getPosition().z));
+                    Ogre::Vector3(node->getPosition().x + moveDistance, node->getPosition().y, node->getPosition().z));
 //            node->rotate(Ogre::Quaternion(Ogre::Degree(2),Ogre::Vector3(0,0,1)), Ogre::Node::TS_LOCAL);
             break;
 //        case OgreBites::SDLK_DOWN:
@@ -36,18 +36,18 @@ bool Game::keyPressed(const OgreBites::KeyboardEvent &evt) {
 //            break;
         case OgreBites::SDLK_UP:
             node->setPosition(
-                    Vector3(node->getPosition().x, node->getPosition().y + moveDistance, node->getPosition().z));
+                    Ogre::Vector3(node->getPosition().x, node->getPosition().y + moveDistance, node->getPosition().z));
 //            node->rotate(Ogre::Quaternion(Ogre::Degree(2),Ogre::Vector3(1,0,0)), Ogre::Node::TS_LOCAL);
             break;
         case OgreBites::SDLK_DOWN:
             node->setPosition(
-                    Vector3(node->getPosition().x, node->getPosition().y - moveDistance, node->getPosition().z));
+                    Ogre::Vector3(node->getPosition().x, node->getPosition().y - moveDistance, node->getPosition().z));
 //            node->rotate(Ogre::Quaternion(Ogre::Degree(2),Ogre::Vector3(-1,0,0)), Ogre::Node::TS_LOCAL);
             break;
         default:
             break;
     }
-    Vector3 pos = node->getPosition();
+    Ogre::Vector3 pos = node->getPosition();
 //    printf("position: %f, %f, %f\n", pos.x, pos.y, pos.z);
     return true;
 }
@@ -73,6 +73,8 @@ void Game::setup() {
     gameField->createField(scnMgr, light);
 
     tank = new Tank(scnMgr, camNode);
+
+    createPhysicWord();
 }
 
 void Game::createLight(SceneManager *scnMgr) {
@@ -86,6 +88,7 @@ void Game::createLight(SceneManager *scnMgr) {
 }
 
 bool Game::frameRenderingQueued(const Ogre::FrameEvent &evt) {
+    physicsWorld->update(evt.timeSinceLastFrame);
     tank->render(evt);
     return true;
 }
@@ -98,8 +101,15 @@ void Game::createCamera(SceneManager *scnMgr) {
 
     camNode = scnMgr->getRootSceneNode()->createChildSceneNode();
     camNode->setPosition(0, 15, 15);
-    camNode->lookAt(Vector3(0, 0, 0), Node::TS_PARENT);
+    camNode->lookAt(Ogre::Vector3(0, 0, 0), Node::TS_PARENT);
     camNode->attachObject(camera);
 
     getRenderWindow()->addViewport(camera);
+}
+
+void Game::createPhysicWord() {
+    physicsWorld = physicsCommon.createPhysicsWorld();
+
+    gameField->createPhysicEntity(physicsWorld, &physicsCommon);
+    tank->createPhysicEntity(physicsWorld, &physicsCommon);
 }

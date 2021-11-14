@@ -7,7 +7,7 @@
 Tank::Tank(SceneManager *scnMgr, SceneNode *camNode) {
     this->camNode = camNode;
 
-    Entity *tankEntity = scnMgr->createEntity("tank.mesh");
+    Ogre::Entity *tankEntity = scnMgr->createEntity("tank.mesh");
     tankNode = scnMgr->getRootSceneNode()->createChildSceneNode();
     tankNode->attachObject(tankEntity);
 //    tankNode->rotate(Ogre::Quaternion(Ogre::Degree(-90), Ogre::Vector3(1, 0, 0)), Ogre::Node::TS_LOCAL);
@@ -43,7 +43,19 @@ void Tank::render(const FrameEvent &evt) {
     Real time = evt.timeSinceLastFrame;
     tankAnimationEntity->addTime(time);
 
-    Vector3 tankPosition = tankNode->getPosition();
+    reactphysics3d::Vector3 pos = tankPhysicBody->getTransform().getPosition();
+    tankNode->setPosition(pos.x, pos.y, pos.z);
+
+    Ogre::Vector3 tankPosition = tankNode->getPosition();
     camNode->setPosition(tankPosition.x, tankPosition.y + 35, tankPosition.z + 15);
     camNode->lookAt(tankNode->getPosition(), Ogre::Node::TS_WORLD);
+}
+
+void Tank::createPhysicEntity(PhysicsWorld *world, PhysicsCommon *physicsCommon) {
+    Ogre::Vector3 tankPosition = tankNode->getPosition();
+    reactphysics3d::Transform transform(
+            reactphysics3d::Vector3(tankPosition.x, tankPosition.y, tankPosition.z),
+            reactphysics3d::Quaternion::identity());
+    tankPhysicBody = world->createRigidBody(transform);
+    tankPhysicBody->setMass(10);
 }
