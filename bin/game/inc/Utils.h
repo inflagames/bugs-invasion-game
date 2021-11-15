@@ -18,6 +18,10 @@ public:
         return {v.x, v.y, v.z};
     }
 
+    Ogre::Quaternion static toOgreQuaternion(rp3d::Quaternion const &q) {
+        return {q.w, q.x, q.y, q.z};
+    }
+
     void static getMeshInformation(const Ogre::Mesh *const mesh,
                                    size_t &vertex_count,
                                    Ogre::Vector3 *&vertices,

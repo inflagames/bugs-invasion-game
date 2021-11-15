@@ -12,7 +12,7 @@ using namespace Ogre;
 
 class Field : public PhysicBase {
 public:
-    void createField(SceneManager *scnMgr, Light *light);
+    void createField(SceneManager *scnMgrIns, Light *light);
 
     void render(const Ogre::FrameEvent &evt);
 
@@ -22,7 +22,7 @@ private:
     SceneNode *terrainNode;
     Ogre::Entity *terrainEntity;
     RigidBody *fieldBody;
-    float heightValues[100];
+    float heightValues[10000];
 
     SceneManager *scnMgr;
 
