@@ -8,25 +8,29 @@
 #include "Ogre.h"
 #include "../PhysicBase.h"
 #include "../Utils.h"
+#include "bullet/btBulletDynamicsCommon.h"
+#include "../Physics.h"
 
 using namespace Ogre;
 
 class Tank : public PhysicBase {
 public:
-    Tank(SceneManager *scnMgr, SceneNode *camNode);
+    Tank(SceneManager *scnMgr);
 
     void rotateCannon(Real angle);
 
     void render(const Ogre::FrameEvent &evt);
 
-    void createPhysicEntity(PhysicsWorld *world, PhysicsCommon *physicsCommon) override;
+    void createPhysicEntity(Physics *physics) override;
 
+    void moveForward();
+    void moveBack();
+    void moveLeft();
+    void moveRight();
 private:
-    SceneNode *camNode;
-    SceneNode *tankNode;
-    Ogre::Entity *tankEntity;
-    AnimationState *tankAnimationEntity;
-    RigidBody *tankPhysicBody;
+    SceneNode *tankNode = nullptr;
+    Ogre::Entity *tankEntity = nullptr;
+    AnimationState *tankAnimationEntity = nullptr;
 };
 
 #endif //BUGSINVATION_TANK_H

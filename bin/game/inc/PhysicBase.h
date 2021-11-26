@@ -5,13 +5,12 @@
 #ifndef BUGSINVATION_PHYSICBASE_H
 #define BUGSINVATION_PHYSICBASE_H
 
-#include <reactphysics3d/reactphysics3d.h>
-
-using namespace reactphysics3d;
+#include "btBulletDynamicsCommon.h"
+#include "Physics.h"
 
 class PhysicBase {
 public:
-    virtual void createPhysicEntity(PhysicsWorld *world, PhysicsCommon *physicsCommon) = 0;
+    virtual void createPhysicEntity(Physics *physics) = 0;
 };
 
 #endif //BUGSINVATION_PHYSICBASE_H

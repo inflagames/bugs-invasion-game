@@ -6,6 +6,22 @@ This game is motivated by the movie "Love & Monsters". In an apocalyptic world d
 
 [*Description of tanks used in the game*](./blender-projects/TANKS_DOCUMENTATION.md)
 
+**Todo list**
+- [x] Add movement to the tank (go forward/backward and rotate)
+  - [ ] Integrate animations with app
+  - [ ] Integrate mouse with tank cannon
+    - [ ] Create a new cursor for the mouse
+  - [ ] Create and integrate Bug (spider) to the game
+    - [ ] Add animation to the spider
+    - [ ] Automatic generation of bugs
+  - [ ] Work in the textures
+    - [ ] tank
+    - [ ] terrain
+    - [ ] spider
+  - [ ] Create start menu
+  - [ ] Add score to the game
+  - [ ] Add collisions to the map
+
 ## Setup OGRE locally (UBUNTU)
 
 Using the following script, the ogre project is automatically cloned, and installed in the target system.

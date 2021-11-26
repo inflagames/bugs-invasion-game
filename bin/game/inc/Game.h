@@ -8,11 +8,10 @@
 #include "Ogre.h"
 #include "OgreApplicationContext.h"
 #include "Field.h"
-#include <reactphysics3d/reactphysics3d.h>
 #include "Tanks/Tank.h"
+#include "Physics.h"
 
 using namespace Ogre;
-using namespace reactphysics3d;
 
 class Game : public OgreBites::ApplicationContext, public OgreBites::InputListener {
 public:
@@ -24,16 +23,17 @@ public:
 
     virtual bool frameRenderingQueued(const Ogre::FrameEvent &evt);
 
+
+
 private:
     SceneManager *scnMgr;
-    SceneNode *camNode;
+//    SceneNode *camNode;
     SceneNode *lightNode;
     Light *light;
     Field *gameField;
     Tank *tank;
 
-    PhysicsCommon physicsCommon;
-    PhysicsWorld *physicsWorld;
+    Physics physics;
 
     void createLight(SceneManager *scnMgr);
     void createCamera(SceneManager *scnMgr);

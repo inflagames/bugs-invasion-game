@@ -4,7 +4,7 @@
 
 #include <set>
 #include <map>
-#include <math.h>
+#include <cmath>
 #include "../inc/Field.h"
 #include "../inc/Utils.h"
 
@@ -17,8 +17,10 @@ void Field::createField(SceneManager *scnMgrIns, Light *light) {
     terrainNode->setPosition(0, 0, 0);
 }
 
-void Field::createPhysicEntity(PhysicsWorld *world, PhysicsCommon *physicsCommon) {
-    size_t vertex_count, index_count;
+void Field::createPhysicEntity(Physics *physics) {
+
+
+/*    size_t vertex_count, index_count;
     Ogre::Vector3 *vertices;
     unsigned long *indices;
 
@@ -57,7 +59,7 @@ void Field::createPhysicEntity(PhysicsWorld *world, PhysicsCommon *physicsCommon
     for (int i = 0; it != xPoints.end(); i++, it++) {
         auto itz = zPoints.begin();
         for (int j = 0; itz != zPoints.end(); j++, itz++) {
-            heightValues[i * nbColumns + j] = points[{(*it), (*itz)}];
+            heightValues[i * nbColumns + j] = points[{(*it), -(*itz)}];
         }
     }
 
@@ -66,10 +68,10 @@ void Field::createPhysicEntity(PhysicsWorld *world, PhysicsCommon *physicsCommon
                                                                                nbRows, minHeight,
                                                                                maxHeight, heightValues,
                                                                                HeightFieldShape::HeightDataType::HEIGHT_FLOAT_TYPE);
-    /*
+    *//*
      x = X * s
      x / X = s
-     */
+     *//*
     reactphysics3d::Vector3 v1;
     reactphysics3d::Vector3 v2;
     heightFieldShape->getLocalBounds(v1, v2);
@@ -84,7 +86,7 @@ void Field::createPhysicEntity(PhysicsWorld *world, PhysicsCommon *physicsCommon
             reactphysics3d::Quaternion::identity());
     fieldBody = world->createRigidBody(transform);
     fieldBody->setType(reactphysics3d::BodyType::STATIC);
-    fieldBody->addCollider(heightFieldShape, Transform::identity());
+    fieldBody->addCollider(heightFieldShape, Transform::identity());*/
 }
 
 void Field::render(const FrameEvent &evt) {

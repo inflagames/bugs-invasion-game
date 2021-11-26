@@ -3,6 +3,8 @@ cmake-build-debug
 ogre
 reactphysics3d
 build
+btogre
+bullet3
 
 # IDEs
 .idea

@@ -6,20 +6,20 @@
 #define BUGSINVATION_UTILS_H
 
 #include "Ogre.h"
-#include <reactphysics3d/reactphysics3d.h>
+#include "btBulletDynamicsCommon.h"
 
 class Utils {
 public:
-    reactphysics3d::Vector3 static toRp3Vector3(Ogre::Vector3 const &v) {
-        return {v.x, v.y, v.z};
-    }
+//    reactphysics3d::Vector3 static toRp3Vector3(Ogre::Vector3 const &v) {
+//        return {v.x, v.y, v.z};
+//    }
 
-    Ogre::Vector3 static toOgreVector3(reactphysics3d::Vector3 const &v) {
-        return {v.x, v.y, v.z};
-    }
+//    Ogre::Vector3 static toOgreVector3(reactphysics3d::Vector3 const &v) {
+//        return {v.x, v.y, v.z};
+//    }
 
-    Ogre::Quaternion static toOgreQuaternion(rp3d::Quaternion const &q) {
-        return {q.w, q.x, q.y, q.z};
+    Ogre::Quaternion static toOgreQuaternion(btQuaternion const &q) {
+        return {q.w(), q.x(), q.y(), q.z()};
     }
 
     void static getMeshInformation(const Ogre::Mesh *const mesh,

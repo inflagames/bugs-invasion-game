@@ -5,7 +5,7 @@
 
 #include "inc/Game.h"
 
-int main(int argc, char *argv[]) {
+int main() {
     Game app;
     app.initApp();
     app.getRoot()->startRendering();

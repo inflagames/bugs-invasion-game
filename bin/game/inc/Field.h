@@ -7,6 +7,7 @@
 
 #include "Ogre.h"
 #include "PhysicBase.h"
+#include "btBulletDynamicsCommon.h"
 
 using namespace Ogre;
 
@@ -16,15 +17,14 @@ public:
 
     void render(const Ogre::FrameEvent &evt);
 
-    void createPhysicEntity(PhysicsWorld *world, PhysicsCommon *physicsCommon) override;
+    void createPhysicEntity(Physics *physics) override;
 
 private:
-    SceneNode *terrainNode;
-    Ogre::Entity *terrainEntity;
-    RigidBody *fieldBody;
+    SceneNode *terrainNode = nullptr;
+    Ogre::Entity *terrainEntity = nullptr;
     float heightValues[10000];
 
-    SceneManager *scnMgr;
+    SceneManager *scnMgr = nullptr;
 
 };
 

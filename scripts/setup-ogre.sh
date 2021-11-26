@@ -40,10 +40,10 @@ else
 
   # Build ogre
   cmake .
-  cmake --build . --config Release
+  cmake --build . --config Debug
 
   # Install ogre
-  sudo cmake --build . --config Release --target install
+  sudo cmake --build . --config Debug --target install
 
   # Remove ogre repo
   cd ..
