@@ -14,6 +14,6 @@ void Physics::initObjects() {
     dynamicsWorld->setGravity(btVector3(0, -10, 0));
 }
 
-btDiscreteDynamicsWorld *Physics::getDynamicsWorld() const {
-    return dynamicsWorld;
-}
+//btDiscreteDynamicsWorld *Physics::getDynamicsWorld() const {
+//    return dynamicsWorld;
+//}

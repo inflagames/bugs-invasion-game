@@ -55,8 +55,8 @@ void Tank::createPhysicEntity(Physics *physics) {
 
 //    Ogre::Vector3 tankPosition = tankNode->getPosition();
 
-    auto *tankShape =
-            new btBoxShape(btVector3(btScalar(2.26), btScalar(0.82), btScalar(4.59)));
+//    auto *tankShape =
+//            new btBoxShape(btVector3(btScalar(2.26), btScalar(0.82), btScalar(4.59)));
 //    btTransform transform;
 //    transform.setIdentity();
 //    transform.setOrigin(btVector3(btScalar(tankPosition.x), btScalar(tankPosition.y), btScalar(tankPosition.z)));

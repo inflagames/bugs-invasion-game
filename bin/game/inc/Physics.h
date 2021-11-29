@@ -19,12 +19,12 @@ class Physics {
     btBroadphaseInterface* overlappingPairCache;
     btSequentialImpulseConstraintSolver* solver;
     btDiscreteDynamicsWorld* dynamicsWorld;
-    std::vector<btCollisionShape *> collisionShapes;
-    std::map<std::string, btRigidBody *> physicsAccessors;
+//    std::vector<btCollisionShape *> collisionShapes;
+//    std::map<std::string, btRigidBody *> physicsAccessors;
 public:
     void initObjects();
 
-    btDiscreteDynamicsWorld *getDynamicsWorld() const;
+//    btDiscreteDynamicsWorld *getDynamicsWorld() const;
 };
 
 #endif //BUGSINVATION_PHYSICS_H
